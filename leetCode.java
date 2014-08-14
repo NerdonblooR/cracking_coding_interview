@@ -48,23 +48,23 @@ public class leetCode {
         return new_len + 1;
     }
 
-    public static int subtract(int subtracted, int subtractor){
-        if (subtractor == 0){
+    public static int subtract(int subtracted, int subTractor){
+        if (subTractor == 0){
             return subtracted;
         }
-        int ret = subtracted ^  subtractor;
-        int carrybit = (~subtracted & subtractor) << 1;
+        int ret = subtracted ^  subTractor;
+        int carryBit = (~subtracted & subTractor) << 1;
         int temp = ret;
-        while (carrybit != 0){
-            ret = ret^carrybit;
-            carrybit = (~temp & carrybit) << 1;
+        while (carryBit != 0){
+            ret = ret^carryBit;
+            carryBit = (~temp & carryBit) << 1;
             temp = ret;
         }
         return ret;
     }
 
     public static int candy(int[] ratings) {
-        int[] candys = new int[ratings.length];
+        int[] candies = new int[ratings.length];
         if (ratings.length <= 1){
             return ratings.length;
         }
@@ -73,9 +73,9 @@ public class leetCode {
         for (int i = 0; i < ratings.length;){
             int j = i;
             if ( j == ratings.length - 1){
-                candys[j] = 1;
+                candies[j] = 1;
                 if (ratings[j] > ratings[j-1]){
-                    candys[j] = candys[j -1] + 1;
+                    candies[j] = candies[j -1] + 1;
                 }
                 break;
             }
@@ -88,19 +88,19 @@ public class leetCode {
                     }
                 }
             }
-            candys[i] = count;
+            candies[i] = count;
             if (i > 0 && ratings[i-1] < ratings[i]){
-                if (count <= candys[i-1]) candys[i] = candys[i-1] + 1;
+                if (count <= candies[i-1]) candies[i] = candies[i-1] + 1;
             }
             int peekValue = count - 1;
             for (int k = i+1; k < i + count; k++){
-                candys[k] = peekValue--;
+                candies[k] = peekValue--;
             }
             i += count;
             count = 1;
         }
 
-        for (int n : candys){
+        for (int n : candies){
             ret += n;
         }
         return ret;
