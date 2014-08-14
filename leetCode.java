@@ -4,23 +4,23 @@ import java.util.*;
 public class leetCode {
 
     public static int longestValidParentheses(String s) {
-        Stack<Character> pstack = new Stack <Character>();
+        Stack<Character> pStack = new Stack <Character>();
         int ans = 0;
         char last;
         for (char c : s.toCharArray()){
             if (c == '('){
-                pstack.push(c);
+                pStack.push(c);
             }else{
-                if (! pstack.empty()){
-                    last = pstack.peek();
+                if (! pStack.empty()){
+                    last = pStack.peek();
                     if (last == '('){
                          ans += 2;
-                         pstack.pop();
+                        pStack.pop();
                     }else{
-                        pstack.push(c);
+                        pStack.push(c);
                     }
                 }else{
-                    pstack.push(c);
+                    pStack.push(c);
                 }
             }
         }
