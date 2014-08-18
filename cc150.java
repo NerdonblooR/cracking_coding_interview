@@ -308,24 +308,42 @@ public class cc150 {
     /****************************CHAPTER17**********************************/
 
     public static int tailingZeros(int n){
-        int num2 = 0;
         int num5 = 0;
         for (int i = n; i > 0; i--){
             int temp = i;
-            for (;temp > 0;){
-                if (temp % 2 == 0) num2++;
-                temp /= 2;
-            }
-            temp = i;
             for (;temp > 0; ){
-                if (temp % 2 == 0) num5++;
+                if (temp % 5 == 0) num5++;
                 temp /= 5;
             }
 
         }
 
-        return (num2 - num5 > 0)? num5: num2;
+        return num5;
     }
+
+    public static int sign (int n){
+        return ((n >> 31) & 0x1);
+    }
+
+    public static int maxNum(int a, int b){
+        int sa = sign(a);
+        int sb = sign(b);
+        int sc = sign(a - b);
+
+
+        int not_equal = sa^sb;
+
+        // if a b have different signs, we want k to be same as sa
+        int k = not_equal * sa + (1^not_equal) * sc;
+        int q = 1^k;
+
+
+
+        return a * k + b * q;
+    }
+
+    /**************************Chapter18************************************/
+
 
 
 
