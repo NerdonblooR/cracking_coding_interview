@@ -1,31 +1,32 @@
 package cracking_coding_interview;
 
+import java.util.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-
-public class CharpterNine {
+/**
+ * Created by haotan on 2014-08-18.
+ */
+public class cc150 {
 
     enum Color { Red, Yellow, Blue};
     static int count = 1;
 
-	public static int countStep(int n) {
-		int[] stepArray = new int[n+1];
-		int ret;
-		stepArray[0] = 1;
-		for (int i = 1; i < n+1; i++) {
-			ret = 0;
-			for (int j = 1; j<4; j++){
-				if (i - j >= 0){
-					ret += stepArray[i-j];
-				}
-			}
-			stepArray[i] = ret;
-		}
-		return stepArray[n];
-	}
+    /****************************CHAPTER9**********************************/
+
+    public static int countStep(int n) {
+        int[] stepArray = new int[n+1];
+        int ret;
+        stepArray[0] = 1;
+        for (int i = 1; i < n+1; i++) {
+            ret = 0;
+            for (int j = 1; j<4; j++){
+                if (i - j >= 0){
+                    ret += stepArray[i-j];
+                }
+            }
+            stepArray[i] = ret;
+        }
+        return stepArray[n];
+    }
 
     public static int magicIndex(int[] intArray, int start, int end){
 
@@ -177,11 +178,11 @@ public class CharpterNine {
         for (int i = 0; i < board.length; i++){
             String row = "";
             for (int j = 0; j < board[i].length; j++){
-               if (board[i][j] == 2){
-                   row += "Q ";
-               }else{
-                   row += "* ";
-               }
+                if (board[i][j] == 2){
+                    row += "Q ";
+                }else{
+                    row += "* ";
+                }
 
             }
             System.out.println(row);
@@ -250,8 +251,81 @@ public class CharpterNine {
         eightQueenProblem(board,0);
     }
 
+    /****************************CHAPTER11**********************************/
 
+    public static int[] mergeArrays(int[] a, int[]b, int aSize, int bSize){
+        int newSize = aSize + bSize;
+        int cur_index = newSize - 1;
+        while(aSize > 0 && bSize > 0){
+            if (b[bSize - 1] >= a[aSize -1]){
+                a[cur_index] = b[bSize -1];
+                bSize--;
+                cur_index--;
+            }
+            else{
+                a[cur_index] = a[aSize -1];
+                aSize--;
+                cur_index--;
+            }
 
+        }
+        for(int i = 0; i < bSize; i++){
+            a[i] = b[i];
+        }
+
+        return a;
+    }
+
+    public static String getSignature(String s){
+        char[] cArray = s.toCharArray();
+        Arrays.sort(cArray);
+        return new String(cArray);
+    }
+
+    public static void sortString(String[] sArray){
+        Hashtable<String,LinkedList<String>> hash =
+                new Hashtable<String,LinkedList<String>>();
+        //construct hashtable
+        for(String s : sArray){
+            String key = getSignature(s);
+            if(!hash.containsKey(key)){
+                hash.put(key,new LinkedList<String>());
+            }
+            System.out.println(key);
+            hash.get(key).push(s);
+        }
+        //some comment
+        int idx = 0;
+        for (String k: hash.keySet()){
+            for(String s:hash.get(k)){
+                sArray[idx] = s;
+                idx++;
+            }
+        }
+
+    }
+
+    /****************************CHAPTER17**********************************/
+
+    public static int tailingZeros(int n){
+        int num2 = 0;
+        int num5 = 0;
+        for (int i = n; i > 0; i--){
+            int temp = i;
+            for (;temp > 0;){
+                if (temp % 2 == 0) num2++;
+                temp /= 2;
+            }
+            temp = i;
+            for (;temp > 0; ){
+                if (temp % 2 == 0) num5++;
+                temp /= 5;
+            }
+
+        }
+
+        return (num2 - num5 > 0)? num5: num2;
+    }
 
 
 
