@@ -322,7 +322,8 @@ public class cc150 {
     }
 
     public static int sign (int n){
-        return ((n >> 31) & 0x1);
+        //convert 0 to 1; 1 to 0;
+        return (1^((n >> 31) & 0x1));
     }
 
     public static int maxNum(int a, int b){
@@ -341,6 +342,93 @@ public class cc150 {
 
         return a * k + b * q;
     }
+
+    private static int findLeftEnd(int[] intArray){
+        for (int i = 0; i < intArray.length - 1; i++){
+            if (intArray[i] > intArray[i+1]){
+                return i;
+            }
+        }
+        return intArray.length - 1;
+    }
+
+    private static int findRightStart(int[] intArray){
+        for (int i = intArray.length - 1; i > 0; i++) {
+            if (intArray[i-1] > intArray[i]){
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    private static int shrinkLeft(int start, int minIndex ,int[] intArray){
+        int minValue = intArray[minIndex];
+        while (intArray[start] > minValue && start > 0){
+            start--;
+        }
+        return start;
+    }
+
+    private static int shrinkRight(int start, int maxIndex ,int[] intArray){
+        int maxValue = intArray[maxIndex];
+        while (intArray[start] < maxValue && start < intArray.length - 1){
+            start++;
+        }
+        return start;
+    }
+
+
+    public static void unSortedPart(int[] intArray){
+        //int[] ret = new int[2];
+
+        //naieve approach: sort the whole array and compare the sorted array
+        // with the original array, first index where value is different from orignal
+        //would be ret[0], the first index i after ret[0] such that intArray[i] is same as
+        //original value would be ret[i];
+
+        int leftEnd = findLeftEnd(intArray);
+
+        if (leftEnd == intArray.length - 1) return;
+
+        int rightStart = findRightStart(intArray);
+
+        int minIndex = leftEnd + 1;
+        int maxIndex = rightStart - 1;
+
+        for (int i = leftEnd; i <= rightStart; i++){
+            if (intArray[i] < intArray[minIndex]) minIndex = 1;
+            if (intArray[i] > intArray[maxIndex]) maxIndex = 1;
+        }
+
+        int start = shrinkLeft(leftEnd, minIndex, intArray);
+
+
+
+
+        //return ret;
+    }
+
+
+    public static int maxContiguousSequence(int[] array){
+        //maximum sum of the contiguous sequence end at index i
+        int[] maxSum = new int[array.length];
+        maxSum[0] = array[0];
+        int max = array[0];
+        for (int i = 1; i < array.length; i++){
+            maxSum[i] = Math.max(maxSum[i-1] + array[i], array[i]);
+            if (max < maxSum[i]) max = maxSum[i];
+
+        }
+
+        return max;
+
+    }
+
+
+    public String convertToEnglish(int n){
+        return "";
+    }
+
 
     /**************************Chapter18************************************/
 
