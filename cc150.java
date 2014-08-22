@@ -430,6 +430,31 @@ public class cc150 {
     }
 
 
+
+    public static TreeNode convert(TreeNode root){
+        TreeNode head = root;
+        if (root == null) return root;
+        if (root.left != null) head = convert(root.left);
+        if (head != root){
+            //traverse to right most node
+        }
+        return head;
+    }
+
+
+
+    public static void shuffleArray(int[] cards){
+        //keep
+        int temp, index;
+        for (int i = 0; i < cards.length; i++){
+            index = (int) Math.random() * (cards.length - i);
+            temp = cards[i];
+            cards[i] = cards[index];
+            cards[index] = temp;
+        }
+    }
+
+
     /**************************Chapter18************************************/
 
 
