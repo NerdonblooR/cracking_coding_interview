@@ -444,10 +444,10 @@ public class cc150 {
 
 
     public static void shuffleArray(int[] cards){
-        //keep
+        //after every iteration, [0..i] is sorted
         int temp, index;
         for (int i = 0; i < cards.length; i++){
-            index = (int) Math.random() * (cards.length - i);
+            index = (int) (Math.random() * (cards.length - i)) + i;
             temp = cards[i];
             cards[i] = cards[index];
             cards[index] = temp;
