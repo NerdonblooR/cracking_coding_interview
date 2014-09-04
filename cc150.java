@@ -9,6 +9,42 @@ public class cc150 {
 
     enum Color { Red, Yellow, Blue};
     static int count = 1;
+    /****************************CHAPTER1**********************************/
+
+    public static boolean containAllUnique(String str){
+        if (str.length() > 256) return false;
+        boolean[] charMap = new boolean[256];
+        for (int i = 0; i < str.length(); i++){
+            if (charMap[str.charAt(i)]) {
+                return false;
+            }
+            charMap[(int)str.charAt(i)] = true;
+        }
+        return true;
+    }
+
+    // one way is to sort the array to check if tow arrays are equal
+    public static boolean isPermutaion(String str1, String str2){
+        if (str1.length() != str2.length()) return false;
+        int[] charCount = new int[256];
+        for (int i=0; i < str1.length(); i++){
+            charCount[str1.charAt(i)]++;
+
+        }
+        for (int j=0; j < 256; j++){
+            charCount[str2.charAt(j)]--;
+            if (charCount[str2.charAt(j)] < 0){
+                return false;
+            }
+        }
+        return true;
+
+    }
+
+
+
+
+
 
     /****************************CHAPTER9**********************************/
 
@@ -443,6 +479,13 @@ public class cc150 {
 
 
 
+
+
+
+    /**************************Chapter18************************************/
+
+
+
     public static void shuffleArray(int[] cards){
         //after every iteration, [0..i] is sorted
         int temp, index;
@@ -454,9 +497,39 @@ public class cc150 {
         }
     }
 
+    public static int[] randomGenerate(int m, int[] pool){
+        int temp, index;
+        int[] ret = new int[m];
+        for (int i=0; i < m; i++){
+            index = (int) (Math.random() * (pool.length - i)) + i;
+            temp = pool[i];
+            pool[i] = pool[index];
+            pool[index] = temp;
+            ret[i] = pool[i];
+        }
+        return ret;
 
-    /**************************Chapter18************************************/
+    }
 
+
+    public static int countTwo(int upperboud){
+        int ret = 0;
+        int scale = 1;
+        int prevRem = 0;
+        int mul, rem;
+        while (upperboud > 0){
+            mul = upperboud / 10;
+            rem = upperboud % 10;
+            ret += scale * (mul + (rem > 2 ? 1 : 0));
+            if (rem == 2){
+                ret += scale / 10 * (prevRem + 1);
+            }
+            upperboud = mul;
+            scale *= 10;
+            prevRem = rem;
+        }
+        return ret;
+    }
 
 
 
