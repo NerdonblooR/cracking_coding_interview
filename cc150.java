@@ -41,6 +41,35 @@ public class cc150 {
 
     }
 
+    public static void replaceSpace(char[] s, int length){
+        //scan the string twice
+        //first scan: count how many spaces are there
+        //second scan: modify string in reverse order
+        //if in original order, we cannot modify the char array
+        //in place, as replacing space with "%20" will overwrite the part
+        //we have not processed yet.
+        for (int i = 0; i < length; i++){
+            int spaceNum = 0;
+            int newlen = length;
+            if (s[i] == ' '){
+                spaceNum++;
+            }
+            newlen += spaceNum * 2;
+            s[newlen] = '\0';
+            for(int j = length -1; i >= 0; i--){
+               if (s[j] == ' '){
+                   s[newlen - 1] = '0';
+                   s[newlen - 2] = '2';
+                   s[newlen - 3] = '%';
+                   newlen -= 3;
+               }else{
+                   s[newlen -1] = s[j];
+                   newlen--;
+               }
+            }
+        }
+    }
+
 
 
 
