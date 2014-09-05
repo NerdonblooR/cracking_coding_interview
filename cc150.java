@@ -70,6 +70,72 @@ public class cc150 {
         }
     }
 
+    public static String compresString(String s){
+        if ( s == null) return s;
+        int count = 1;
+        String ret = "";
+        char last = s.charAt(0);
+        for (int i = 1; i < s.length(); i++){
+            if (s.charAt(i) == last){
+                count++;
+            }else{
+                //concatenation is not efficient
+                ret += String.valueOf(last) + String.valueOf(count);
+                last = s.charAt(i);
+                count = 1;
+            }
+
+        }
+        return  ret += String.valueOf(last) + String.valueOf(count);
+
+    }
+
+    public static int calculateCompressSize(String s){
+        int count = 1;
+        int size = 0;
+        char last = s.charAt(0);
+        for (int i = 1; i < s.length(); i++){
+            if (s.charAt(i) == last){
+                count++;
+            }else{
+                last = s.charAt(i);
+                size += 1 + String.valueOf(count).length();
+                count = 1;
+            }
+        }
+        return size + 1 + String.valueOf(count).length();
+
+    }
+
+
+    public void setArray(char[] array, int index, char last, int count){
+
+    }
+
+    public void rotateMatrix(int[][] m){
+        int rowNum = m.length;
+        for (int layer = 0; layer < rowNum/2; ++layer){
+            //set up the first and last column to perform rotation
+            int first = layer;
+            int last = rowNum - 1 - layer;
+            for (int i=first; i < last; i++){
+                // distance from the starting point
+                int offset = first - i;
+                int top = m[layer][i];
+
+                //left -> top
+                m[first][i] = m[last - offset][first];
+                //bottom -> left
+                m[last - offset][first] = m[last][last - offset];
+                //right -> bottom
+                m[last][last - offset] = m[i][last];
+                //top -> right
+                m[i][last] = top;
+
+            }
+        }
+    }
+
 
 
 
