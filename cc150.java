@@ -194,18 +194,52 @@ public class cc150 {
         //waht if the
         ListNode walker1 = head;
         ListNode walker2 = head;
-        for (int i=0; i < k; i++) {
+        for (int i=0; i < k-1; i++) {
             if (walker2 == null){
-                break;
+                return null;
             }
             walker2 = walker2.next;
         }
-        while(walker2 != null){
+        if (walker2 == null) return null;
+        while(walker2.next != null){
             walker1 = walker1.next;
             walker2 = walker2.next;
         }
         return walker1;
     }
+
+    public static void deleteNode (ListNode middleNode){
+        if (middleNode.next == null) return;
+        middleNode.val = middleNode.next.val;
+        middleNode.next = middleNode.next.next;
+    }
+
+
+    public static ListNode partitionLinkedList(ListNode head, int x){
+        if (head == null){
+            return null;
+        }
+        //make ListNode as head if its value is smaller than x
+        ListNode curHead = head;
+        ListNode walker = head;
+        while (walker.next != null){
+            if (walker.next.val < x){
+                ListNode temp = walker.next;
+                walker.next = walker.next.next;
+                temp.next = curHead;
+                curHead = temp;
+
+            }else{
+                walker = walker.next;
+            }
+        }
+        return curHead;
+    }
+
+
+
+
+
 
 
 
