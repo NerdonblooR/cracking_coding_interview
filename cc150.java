@@ -136,6 +136,77 @@ public class cc150 {
         }
     }
 
+    public static void processMatrix(int[][] m){
+        int rowNum = m.length;
+        int colNum = m[0].length;
+
+        //can replace the hashset to be a boolean array
+        //which can be further optimized if using a bit vector
+
+        HashSet<Integer> colNeedUpdate = new HashSet<Integer>();
+        HashSet<Integer> rowNeedUpdate = new HashSet<Integer>();
+
+        for (int i=0; i < rowNum; i++){
+            for (int j=0; j < colNum; j++){
+                if (m[i][j] == 0){
+                    colNeedUpdate.add(j);
+                    rowNeedUpdate.add(i);
+                }
+            }
+
+        }
+
+        for (Integer col: colNeedUpdate){
+            for (int r=0; r < rowNum; r++){
+                m[r][col] = 0;
+            }
+        }
+
+        for (Integer row: rowNeedUpdate){
+            for (int c=0; c < colNum; c++){
+                m[row][c] = 0;
+            }
+        }
+
+    }
+
+    /****************************CHAPTER2**********************************/
+
+    public static void removeDuplicate(ListNode head){
+        if (head == null) return;
+        ListNode current = head;
+        while(current != null){
+           ListNode runner = current;
+           while (runner.next != null){
+               if (runner.next.val == current.val){
+                   runner.next = runner.next.next;
+               }else{
+                   runner = runner.next;
+               }
+           }
+           current = current.next
+
+        }
+        return;
+    }
+
+    public static ListNode kthToLastElement(ListNode head, int k){
+        //waht if the
+        ListNode walker1 = head;
+        ListNode walker2 = head;
+        for (int i=0; i < k; i++) {
+            if (walker2 == null){
+                break;
+            }
+            walker2 = walker2.next;
+        }
+        while(walker2 != null){
+            walker1 = walker1.next;
+            walker2 = walker2.next;
+        }
+        return walker1;
+    }
+
 
 
 
