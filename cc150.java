@@ -236,6 +236,40 @@ public class cc150 {
         return curHead;
     }
 
+    public static int transferToNum(ListNode n1){
+        int ret = 0;
+        int digit = 1;
+        ListNode walker = n1;
+        while(walker != null){
+            ret += digit* walker.val;
+            walker = walker.next;
+            digit *= 10;
+        }
+        return ret;
+
+    }
+
+    public static ListNode transferToList(int num){
+        ListNode head = new ListNode(num % 10);
+        ListNode newNode;
+        num = num / 10;
+        while(num > 10){
+            newNode = new ListNode(num % 10);
+            head.next = newNode;
+            head = head.next;
+            num /= 10;
+        }
+        return head;
+    }
+
+    public static ListNode linkedListSum(ListNode n1, ListNode n2){
+        return transferToList(transferToNum(n1) + transferToNum(n2));
+    }
+
+    public static boolean isPalidrome(ListNode n1){
+
+    }
+
 
 
 
