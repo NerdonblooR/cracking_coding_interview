@@ -184,7 +184,7 @@ public class cc150 {
                    runner = runner.next;
                }
            }
-           current = current.next
+           current = current.next;
 
         }
         return;
