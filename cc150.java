@@ -266,13 +266,33 @@ public class cc150 {
         return transferToList(transferToNum(n1) + transferToNum(n2));
     }
 
-    public static boolean isPalidrome(ListNode n1){
+
+
+    public static ListNode detectCycle(ListNode head){
+        if (head == null) return null;
+        if (head.next != null) return null;
+        ListNode slowWalker = head;
+        ListNode fastWalker = head.next.next;
+
+        //assume this is a valid circular linked list
+        while (slowWalker != fastWalker){
+            if (slowWalker == null || fastWalker == null) return null;
+            slowWalker = slowWalker.next;
+            fastWalker = fastWalker.next;
+            if (fastWalker == null) return null;
+            fastWalker = fastWalker.next;
+        }
+        //when fastWalker overlap with slowWalker
+        fastWalker = head;
+        while (slowWalker != fastWalker){
+            slowWalker = slowWalker.next;
+            fastWalker = fastWalker.next;
+        }
+        return fastWalker;
 
     }
 
-
-
-
+    /****************************CHAPTER3**********************************/
 
 
 

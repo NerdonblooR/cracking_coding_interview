@@ -51,7 +51,6 @@ public class LinkedListQuestion {
             }
         }
         return null;
-
     }
 
     public static ListNode mergeList(ListNode l1, ListNode l2){
