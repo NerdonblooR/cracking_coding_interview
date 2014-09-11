@@ -295,7 +295,37 @@ public class cc150 {
     /****************************CHAPTER3**********************************/
 
 
+    public static void sortStack(Stack<Integer> stack){
+        //perform bubble sort by using two stacks
+        Stack<Integer> result = new Stack<Integer>();
+        while (!stack.isEmpty()) {
+            Integer currentElement = stack.pop();
+            while (result.isEmpty() || result.peek() > currentElement){
+                stack.push(result.pop());
+            }
+            //we dont need to push back the emelemtn we push back to stack
+            //next iteration of outer loop will handle it
+            result.push(currentElement);
 
+        }
+    }
+
+
+    /****************************CHAPTER4**********************************/
+    public static boolean isBalanced(TreeNode root){
+        return getHeight(root) != -1;
+    }
+
+    public static int getHeight(TreeNode root){
+        if (root == null) return 0;
+        int left_height = getHeight(root.left);
+        if (left_height == -1) return -1;
+        int right_height = getHeight(root.right);
+        if (right_height == -1) return -1;
+        if (Math.abs(left_height - right_height) > 1) return -1;
+        return 1 + Math.max(left_height, right_height);
+
+    }
 
 
 

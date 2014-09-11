@@ -13,15 +13,17 @@ public class KMPAlgorithm {
         int[] ret = new int[pl];
         ret[0] = 0;
         int k = 0;
-        for (int i = 1; i < pl; i++){
+        for (int i = 1; i < pl;i++){
             // if matched keep going
             if (pattern[k] == pattern[i]){
                 k += 1;
             }else{
                 //if not matched, back track
                 while (k > 0 && pattern[k] != pattern[i]){
-                    k = ret[k];
+                    k = ret[k-1];
                 }
+                //increase k if pattern[i] is matchedsd
+                if (pattern[k] == pattern[i]) k++;
             }
             ret[i] = k;
         }
