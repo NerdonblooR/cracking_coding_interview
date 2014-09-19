@@ -327,7 +327,193 @@ public class cc150 {
 
     }
 
+    public static TreeNode createBST(int[] sortedArray){
+        int length = sortedArray.length;
+        return constructBST(sortedArray,0,length-1);
 
+    }
+
+    public static TreeNode constructBST(int[] sortedArray, int low, int high){
+        if (high < 0 || low > sortedArray.length - 1) return null;
+        if (low == high) return new TreeNode(sortedArray[low]);
+        int midPoint = (low - high + 1) / 2;
+        TreeNode ret = new TreeNode(sortedArray[midPoint]);
+        TreeNode left = constructBST(sortedArray,low,midPoint - 1);
+        TreeNode right = constructBST(sortedArray,midPoint+1,high);
+        ret.left = left;
+        ret.right = right;
+        return ret;
+
+    }
+
+    public static LinkedList<LinkedList<TreeNode>> groupNodesByDepth(TreeNode root){
+        LinkedList<LinkedList<TreeNode>> ans = new LinkedList<LinkedList<TreeNode>>();
+        LinkedList<TreeNode> currentLayer = new LinkedList<TreeNode>();
+        currentLayer.add(root);
+        while (!currentLayer.isEmpty()){
+            ans.add(currentLayer);
+            LinkedList<TreeNode> parents = currentLayer;
+            currentLayer = new LinkedList<TreeNode>();
+            for (TreeNode parent : parents){
+                if (parent.left != null) currentLayer.add(parent.left);
+                if (parent.right != null) currentLayer.add(parent.right);
+            }
+        }
+        return ans;
+
+    }
+
+
+    public static TreeNode nextNodeInBST(TreeNode node){
+        //it could be the leftmost node of right subTree
+
+        //otherwise it could be the first ancestore with right subTree
+        //is there is no , return null
+        TreeNode walker,parent;
+        if (node.left != null){
+            walker = node.left;
+            while (walker.right != null){
+                walker = walker.left;
+            }
+            return walker;
+        }else{
+            walker = node;
+            parent = node.parent;
+            while (walker != null && parent != null && parent.left != walker){
+                walker = parent;
+                parent = walker.parent;
+            }
+            return parent;
+        }
+
+    }
+
+    public static TreeNode commonAncestor(TreeNode root, TreeNode nodeOne, TreeNode nodeTwo){
+        //firstNode suchtaht nodeOne and nodeTwo appear in different subTree
+
+        return null;
+    }
+
+    public static void findPath(TreeNode node, int sum, int[] path, int level){
+        if (node == null) return;
+
+        path[level] = node.val;
+
+        int t = 0;
+        for (int i = level; i >= 0; i--){
+            t += path[i];
+            if ( t == sum){
+                //print out the path
+            }
+        }
+
+        findPath(node.left, sum, path, level+1);
+        findPath(node.left, sum, path, level+1);
+
+    }
+
+
+    public static void findPath(TreeNode root, int sum){
+        //construct path
+        //
+    }
+
+    /****************************CHAPTER5**********************************/
+
+    /* basic bit manipulation trick*/
+    public static boolean getBit(int num, int i){
+        return ((num & (1 << i)) != 0);
+    }
+
+    public static int setBit(int num, int i){
+        return (num | (1 << i));
+    }
+
+    public static int clearBit(int num, int i){
+        int mask = ~(1 << i);
+        return num & mask;
+    }
+
+    //clear from the right most bit
+    public static int clearTrough(int num, int i){
+        int mask = (1 << (i+1)) - 1;
+        return num & mask;
+
+    }
+
+
+    public static int updateBit(int num, int i, int value){
+        int mask = value << i;
+        return clearBit(num, i) | mask;
+
+    }
+
+    public static int generateMask(int j, int i){
+        //generate a mask where bit j to i are 0, 1 elesewhere
+
+        int allones = ~0;
+        //generate mask such that from most significant bit to ith bit are 0
+        int ma = (1 << (i)) - 1;
+        //generate mask such that from most significant bit to jth bit are 1
+        int mb = allones << (j+1);
+        return mb | ma;
+
+    }
+
+    public static int  insertNumber(int N, int M, int j, int i){
+        //clear bit between jth bit and ith bit
+        //left shift M by m bit
+        //merget two bit
+
+        int mask = generateMask(j,i);
+        int cleared = N & mask;
+
+
+        return cleared | (M << j);
+
+    }
+
+    public static String convertBinary(double i){
+        //conduct check
+        if (i > 1 || i < 0) return "ERROR";
+        StringBuilder sb = new StringBuilder();
+        sb.append('.');
+        while(i > 0){
+            if (sb.length() >= 32) return "ERROR";
+            double r = i * 2;
+            if (i > 1){
+                sb.append('1');
+                i = r - 1;
+            }else{
+                sb.append('0');
+                i = r;
+            }
+            count += 1;        }
+        return sb.toString();
+    }
+
+    public static void nextSmallestAndLargest(int i){
+
+    }
+
+    public static int numOfBitsForConversion(int numA, int numB){
+        int diffBits = numA ^ numB;
+        int count = 0;
+        for(int c = numA ^ numB; c != 0; c = c & (c - 1)){
+            count++;
+        }
+        return count;
+    }
+
+
+    public static int swapBit(int num){
+       return ((num & 0xaaaaaaaa) >> 1) | ((num & 0x55555555) << 1);
+    }
+
+
+    /****************************CHAPTER7**********************************/
+
+    //prime number related: every positive integer can be decomposed into product of primes
 
 
     /****************************CHAPTER9**********************************/
