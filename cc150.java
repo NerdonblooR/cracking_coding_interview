@@ -8,6 +8,14 @@ import java.util.*;
 public class cc150 {
 
     enum Color { Red, Yellow, Blue};
+
+    private class Point{
+        public int x;
+        public int y;
+
+        public Point(int x, int y){ this.x = x; this.y = y;}
+
+    }
     static int count = 1;
     /****************************CHAPTER1**********************************/
 
@@ -135,6 +143,7 @@ public class cc150 {
             }
         }
     }
+
 
     public static void processMatrix(int[][] m){
         int rowNum = m.length;
@@ -640,10 +649,12 @@ public class cc150 {
 
         if (screen[y][x] == origColor){
             screen[y][x] = newColor;
+            //paint right
             paintFill(screen, x+1, y, origColor, newColor);
+            //paint left
             paintFill(screen, x-1, y, origColor, newColor);
-            paintFill(screen, x, y-1, origColor, newColor);
-            paintFill(screen, x, y-1, origColor, newColor);
+            paintFill(screen, x, y+1, origColor, newColor);//bottom
+            paintFill(screen, x, y-1, origColor, newColor);//top
         }
 
         return;

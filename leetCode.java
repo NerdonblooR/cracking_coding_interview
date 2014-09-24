@@ -245,4 +245,80 @@ public class leetCode {
         return dummy.next;
     }
 
+    public static String longestPalindrome(String s) {
+        int length = 0; int max = 0;
+        String longest = "";
+        for (int i = 0; i < s.length(); i++){
+            int k = i; int before = 0;
+            length = 1;
+            for (int j=1; i-j >= 0 && k + j < s.length(); j++){
+                if (s.charAt(i-j) == s.charAt(k+j)){
+                    before++;
+                    length += 2;
+                }else{
+                    //break if palidrome ends
+                    break;
+                }
+            }
+            max = Math.max(length, max);
+            if (max == length) longest = s.substring(i - before, k + before + 1);
+            //another case;
+            if (i + 1 != s.length() && s.charAt(i) == s.charAt(i+1)){
+                k = i + 1;
+                length = 2;
+                before = 0;
+                for (int j=1; i-j >= 0 && k + j < s.length(); j++){
+                    if (s.charAt(i-j) == s.charAt(k+j)){
+                        before++;
+                        length += 2;
+                    }else{
+                        break;
+                    }
+                }
+                max = Math.max(length, max);
+                if (max == length) longest = s.substring(i - before, k + before + 1);
+            }
+        }
+        return longest;
+    }
+
+    public static RandomListNode copyRandomList(RandomListNode head) {
+        if (head == null){
+            return null;
+        }
+
+        RandomListNode walker = head;
+
+        while (walker != null){
+            RandomListNode next = walker.next;
+            walker.next = new RandomListNode(walker.label);
+            walker.next.next = next;
+            walker = next;
+        }
+
+        walker = head;
+
+        while (walker != null){
+            walker.next.random = (walker.random == null)? null : walker.random.next;
+            walker = walker.next.next;
+        }
+
+        RandomListNode ret = head.next;
+        RandomListNode walker2 = ret;
+        walker = head;
+
+        while(true){
+            walker.next = walker.next.next;
+            if (walker.next ==null){
+                break;
+            }
+            walker2.next = walker2.next.next;
+            walker = walker.next;
+            walker2 = walker2.next;
+        }
+
+        return ret;
+
+    }
+
 }

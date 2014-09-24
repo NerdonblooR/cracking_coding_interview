@@ -1,6 +1,7 @@
 package cracking_coding_interview;
 
 public class LinkedListQuestion {
+
 	public static ListNode partionList(ListNode head, int x){
 		ListNode curHead = head;
 		if (head == null){
@@ -52,6 +53,68 @@ public class LinkedListQuestion {
         }
         return null;
     }
+
+    public static int[] mergeTwoSortedArray(int[] a, int[] b){
+
+        int i = 0; int j = 0; int k = 0;
+
+        int[] ret = new int[a.length + b.length];
+
+        //no string consumes
+        while (i < a.length && j < b.length){
+
+            if (a[i] > b[j]){
+                ret[k] = a[i];
+                i++;
+
+            }else{
+                ret[k] = b[j];
+                j++;
+            }
+            k++;
+        }
+
+        return ret;
+
+
+    }
+
+    public static ListNode mergeTwoSortedLinkedList(ListNode l1, ListNode l2){
+        //use two walker to keep track of the head of un-merged part
+        ListNode head = l1.val > l2.val ? l2 : l1;
+        ListNode pivot = l1.val > l2.val ? l1 : l2;
+        ListNode walker = head;
+
+        if (l1 == null)return l2;
+        if (l2 == null)return l1;
+
+        while (walker.next != null){
+
+            if (pivot == null){
+                return head;
+            }
+
+            if (walker.next.val < pivot.val){
+                //advance the walker
+                walker = walker.next;
+            }else{
+                ListNode temp = walker.next;
+                walker.next = pivot;
+                pivot = temp;
+                walker = walker.next;
+            }
+
+        }
+
+
+        walker.next = pivot;
+
+
+        return head;
+
+    }
+
+
 
     public static ListNode mergeList(ListNode l1, ListNode l2){
 
