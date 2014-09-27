@@ -5,6 +5,7 @@ package cracking_coding_interview;
  *
  * An KMP algorithm implementation from Introduction to Algorithm
  */
+
 public class KMPAlgorithm {
 
 

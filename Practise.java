@@ -1,5 +1,6 @@
 package cracking_coding_interview;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -69,6 +70,33 @@ public class Practise {
         }
 
         return ret;
+
+    }
+
+    public boolean twoSum(int[] a, int target){
+        //sort the array
+        Arrays.sort(a);
+        for (int i = 0; i < a.length; i++){
+            int toSearch = target - a[i];
+            if (binarySearch(a,toSearch,i+1,a.length)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean binarySearch(int[] a, int target, int low, int high){
+        int mid = low + (high - low) / 2;
+
+        if (low > high) return false;
+
+        if (a[mid] == target){
+            return true;
+        }
+
+        if (a[mid] < target) return  binarySearch(a, target, mid+1, high);
+
+        return  binarySearch(a, target, low, mid-1);
 
     }
 

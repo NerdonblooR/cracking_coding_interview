@@ -3,30 +3,6 @@ package cracking_coding_interview;
 import java.util.*;
 public class leetCode {
 
-    public static int longestValidParentheses(String s) {
-        Stack<Character> pStack = new Stack <Character>();
-        int ans = 0;
-        char last;
-        for (char c : s.toCharArray()){
-            if (c == '('){
-                pStack.push(c);
-            }else{
-                if (! pStack.empty()){
-                    last = pStack.peek();
-                    if (last == '('){
-                         ans += 2;
-                        pStack.pop();
-                    }else{
-                        pStack.push(c);
-                    }
-                }else{
-                    pStack.push(c);
-                }
-            }
-        }
-        return ans;
-     }
-
     public static int removeElement(int[] A, int elem) {
         int l = A.length;
         int new_len = l - 1;

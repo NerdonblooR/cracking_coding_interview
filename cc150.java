@@ -120,6 +120,24 @@ public class cc150 {
 
     }
 
+    public void rotateMatrixPractise(int[][] m){
+        int rowNum = m.length;
+        for(int layer = 0; layer < rowNum/2; layer++){
+            int first = layer;
+            int last = rowNum - 1 - layer;
+            for (int i=first; i < last; i++){
+                int offset = i - first;
+                int top = m[layer][i];
+                m[first][i] = m[last - offset][first]; // right -> top
+                m[last - offset][first] = m[last][last -offset];
+                m[last][last - offset] = m[i][last];
+                m[i][last] = top;
+            }
+
+        }
+        return;
+    }
+
     public void rotateMatrix(int[][] m){
         int rowNum = m.length;
         for (int layer = 0; layer < rowNum/2; ++layer){
