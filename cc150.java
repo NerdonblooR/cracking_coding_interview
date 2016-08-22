@@ -146,8 +146,8 @@ public class cc150 {
             int last = rowNum - 1 - layer;
             for (int i=first; i < last; i++){
                 // distance from the starting point
-                int offset = first - i;
-                int top = m[layer][i];
+                int offset = i - first;
+                int top = m[first][i];
 
                 //left -> top
                 m[first][i] = m[last - offset][first];
